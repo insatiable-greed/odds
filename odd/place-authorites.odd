@@ -1,0 +1,156 @@
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="en">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>place-authorites</title>
+                <author/>
+            </titleStmt>
+            <publicationStmt>
+                <publisher>TEI Consortium</publisher>
+                <availability status="free">
+                    <p>TEI material can be licensed differently depending on the use you intend to
+                        make of it. Hence it is made available under both the CC+BY and BSD-2
+                        licences. The CC+BY licence is generally appropriate for usages which treat
+                        TEI content as data or documentation. The BSD-2 licence is generally
+                        appropriate for usage of TEI content in a software environment. For further
+                        information or clarification, please contact the TEI Consortium
+                        (info@tei-c.org).</p>
+                </availability>
+            </publicationStmt>
+            <sourceDesc>
+                <p>Written from scratch.</p>
+            </sourceDesc>
+        </fileDesc>
+        <encodingDesc>
+            <appInfo>
+                <application ident="RomaJS" version="1.1.2" when="2025-06-17T10:44:34.778Z">
+                    <desc>File edited with <ref target="https://github.com/TEIC/romajs"
+                        >RomaJS</ref></desc>
+                </application>
+            </appInfo>
+            <appInfo>
+                <application ident="RomaJS" version="1.1.2" when="2025-06-17T10:50:15.985Z">
+                    <desc>File edited with <ref target="https://github.com/TEIC/romajs"
+                        >RomaJS</ref></desc>
+                </application>
+            </appInfo>
+        </encodingDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <head>TEI Complete</head>
+            <p>This TEI customization describes a schema that includes <emph>all</emph> of the TEI
+                P5 modules. This is a very useful starting place for manually creating your own
+                customizations — it is much easier to delete the modules you do not want than to add
+                the modules you do. Furthermore this customization often proves helpful for testing
+                TEI software.</p>
+            <p>However, this particular TEI customization is <emph>not recommended</emph> for actual
+                use for encoding documents. It produces schemas and reference documentation that
+                will be much larger and include many more elements than almost anyone could
+                conceivably ever need. Tempting though it may be simply to have absolutely
+                everything, and <q>just ignore</q> elements not required, experience has shown that
+                their presence makes the documentation harder to read and use, and makes a schema
+                that is far more lax than desired.</p>
+            <p>The <att>n</att> attribute of each <gi>moduleRef</gi> below reflects the chapter
+                number of the TEI <title>Guidelines</title> in which the module being referenced is
+                defined. Note that the modules are generally referred to in the order defined, with
+                the exception that the module for <title level="a">Simple Analytic
+                    Mechanisms</title> is referred to before the module for <title level="a"
+                    >Dictionaries</title>. This is because the class <name type="class"
+                    >att.lexicographic.normalized</name> (which is defined in <name type="module"
+                    >analysis</name>) needs to be specified before the class <name type="class"
+                    >att.lexicographic</name> (which is defined in <name type="module"
+                    >dictionaries</name>).</p>
+            <p>The first four modules are often called the <soCalled>required</soCalled> modules.
+                However, these modules are not themselves technically required to create a TEI
+                conformant markup language (let alone a useful non-TEI conformant markup language).
+                Rather, they each contain one or more <emph>elements</emph> which are required for
+                TEI conformance.</p>
+            <schemaSpec ident="place-authorities" start="listPlace" prefix="tei_" targetLang="en"
+                docLang="en">
+                <moduleRef n="01" key="tei"/>
+                <moduleRef n="03" key="core" include="name desc"/>
+                <moduleRef n="14" key="namesdates" include="place listPlace"/>
+                <elementSpec ident="desc" mode="change">
+                    <attList>
+                        <attDef ident="ana" mode="delete"/>
+                        <attDef ident="cert" mode="delete"/>
+                        <attDef ident="change" mode="delete"/>
+                        <attDef ident="copyOf" mode="delete"/>
+                        <attDef ident="corresp" mode="delete"/>
+                        <attDef ident="exclude" mode="delete"/>
+                        <attDef ident="facs" mode="delete"/>
+                        <attDef ident="generatedBy" mode="delete"/>
+                        <attDef ident="n" mode="delete"/>
+                        <attDef ident="next" mode="delete"/>
+                        <attDef ident="prev" mode="delete"/>
+                        <attDef ident="rend" mode="delete"/>
+                        <attDef ident="rendition" mode="delete"/>
+                        <attDef ident="resp" mode="delete"/>
+                        <attDef ident="sameAs" mode="delete"/>
+                        <attDef ident="select" mode="delete"/>
+                        <attDef ident="source" mode="delete"/>
+                        <attDef ident="style" mode="delete"/>
+                        <attDef ident="subtype" mode="delete"/>
+                        <attDef ident="synch" mode="delete"/>
+                        <attDef ident="versionDate" mode="delete"/>
+                        <attDef ident="xml:base" mode="delete"/>
+                        <attDef ident="xml:lang" mode="delete"/>
+                        <attDef ident="xml:space" mode="delete"/>
+                        <attDef ident="xml:id" mode="delete"/>
+                    </attList>
+                </elementSpec>
+                <elementSpec ident="name" mode="change">
+                    <classes mode="change">
+                        <memberOf key="att.cmc" mode="delete"/>
+                        <memberOf key="att.editLike" mode="delete"/>
+                    </classes>
+                    <attList>
+                        <attDef ident="n" mode="delete"/>
+                        <attDef ident="xml:id" mode="delete"/>
+                        <attDef ident="xml:base" mode="delete"/>
+                        <attDef ident="xml:space" mode="delete"/>
+                        <attDef ident="rend" mode="delete"/>
+                        <attDef ident="style" mode="delete"/>
+                        <attDef ident="rendition" mode="delete"/>
+                        <attDef ident="cert" mode="delete"/>
+                        <attDef ident="resp" mode="delete"/>
+                        <attDef ident="source" mode="delete"/>
+                        <attDef ident="when-custom" mode="delete"/>
+                        <attDef ident="notBefore-custom" mode="delete"/>
+                        <attDef ident="notAfter-custom" mode="delete"/>
+                        <attDef ident="from-custom" mode="delete"/>
+                        <attDef ident="to-custom" mode="delete"/>
+                        <attDef ident="datingPoint" mode="delete"/>
+                        <attDef ident="datingMethod" mode="delete"/>
+                        <attDef ident="when-iso" mode="delete"/>
+                        <attDef ident="notBefore-iso" mode="delete"/>
+                        <attDef ident="notAfter-iso" mode="delete"/>
+                        <attDef ident="from-iso" mode="delete"/>
+                        <attDef ident="to-iso" mode="delete"/>
+                        <attDef ident="role" mode="delete"/>
+                        <attDef ident="nymRef" mode="delete"/>
+                        <attDef ident="key" mode="delete"/>
+                        <attDef ident="ref" mode="delete"/>
+                    </attList>
+                </elementSpec>
+                <elementSpec ident="place" mode="change">
+                    <attList>
+                        <attDef ident="xml:id" usage="req" mode="change"/>
+                        <attDef ident="n" mode="delete"/>
+                        <attDef ident="xml:lang" mode="delete"/>
+                        <attDef ident="xml:base" mode="delete"/>
+                        <attDef ident="xml:space" mode="delete"/>
+                        <attDef ident="rend" mode="delete"/>
+                        <attDef ident="style" mode="delete"/>
+                        <attDef ident="rendition" mode="delete"/>
+                        <attDef ident="source" mode="delete"/>
+                        <attDef ident="evidence" mode="delete"/>
+                        <attDef ident="instant" mode="delete"/>
+                        <attDef ident="sortKey" mode="delete"/>
+                    </attList>
+                </elementSpec>
+            </schemaSpec>
+        </body>
+    </text>
+</TEI>

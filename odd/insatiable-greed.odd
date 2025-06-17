@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="en">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Transcription Guidelines</title>
+                <author>Michael Hawkins</author>
+            </titleStmt>
+            <publicationStmt>
+                <publisher>Insatiable Greed Project</publisher>
+                <pubPlace>Cambridge</pubPlace>
+                <date when="2025-06-17">2025</date>
+                <availability status="free">
+                    <p>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International.</p>
+                </availability>
+            </publicationStmt>
+            <sourceDesc>
+                <p>Written from scratch.</p>
+            </sourceDesc>
+        </fileDesc>
+        <encodingDesc>
+            <appInfo>
+                <application ident="RomaJS" version="1.1.2" when="2025-06-16T09:36:15.127Z">
+                    <desc>File edited with <ref target="https://github.com/TEIC/romajs"
+                        >RomaJS</ref></desc>
+                </application>
+            </appInfo>
+        </encodingDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <div>
+                <div>
+                    <head>Introduction</head>
+                    <p>The Insatiable Greed Project follows the <ref>TEI P5 Guidelines</ref>, the gold standard for digital textual transcription. Our approach adapts—with permission—guidelines from the <ref>Casebooks Project (Young, Hawkins, Ralley, Cambridge 2011)</ref> and the <ref>Newton Project (John T. Young, Sussex 2011)</ref>.</p>
+                    
+                    <p>These Guidelines provide an accessible overview of our transcription policy and tagging conventions. The <ref>Element Set</ref> offers detailed, specific rules on how each element is to be used (or not used).</p>
+                    
+                    <p>While we aim to minimize jargon, familiarity with basic XML concepts is assumed, such as elements (empty and non-empty), attributes, attribute values, and entities. Understanding how to nest elements is essential. If you're new to XML, we recommend reading a “<ref>Gentle Introduction to XML</ref>.”</p>
+                    
+                    <p>A key tool for editors is the XML comment (<egXML xmlns="http://www.tei-c.org/ns/Examples"><!-- --></egXML>). These internal notes are never published but serve as vital editorial communication. Comments can flag issues, explain coding decisions, or raise queries—for example: <egXML xmlns="http://www.tei-c.org/ns/Examples"><!-- TRANSC: Greek 'nu' is actually italic 'v' but encoded as nu - mjh --></egXML>, or <egXML xmlns="http://www.tei-c.org/ns/Examples"><!-- TODO: Can you make out this word? - mjh --></egXML>. Signing comments with initials is helpful. Use standardized headings such as:</p>
+                    <list>
+                        <item><egXML xmlns="http://www.tei-c.org/ns/Examples"><!--CHECK: verify against the original - ar--></egXML></item>
+                        <item><egXML xmlns="http://www.tei-c.org/ns/Examples"><!--TODO: editorial task - ne--></egXML></item>
+                        <item><egXML xmlns="http://www.tei-c.org/ns/Examples"><!--TRANSC: transcription-related observation or issue - mjh--></egXML></item>
+                    </list>
+                    <p>Such notes are invaluable during final review, allowing for targeted searches of unresolved issues.</p>
+                    <p>Finally, take special care with spacing around elements. While it may seem
+                        pedantic, consistent spacing is critical for correct display and
+                        interpretation of transcribed texts.</p>
+                </div>
+                <div>
+                    <head>Document Structure</head>
+                    <p>Each document is enclosed within a root <gi>TEI</gi> element, containing two
+                        main components: <gi>teiHeader</gi> and <gi>text</gi> (in that order).</p>
+                    <p>The <gi>teiHeader</gi> contains all the metadata on the document, such as
+                        information about its source, what language(s) it contains, and a record of
+                        transcription work.</p>
+                    <p>The transcription itself is placed within <gi>text</gi>, which contains the required <gi>body</gi> element.</p>
+                    <p><gi>body</gi> includes one or more <gi>div</gi> elements, each representing a distinct section of the text—such as chapters, prefaces, or other logical divisions. The <gi>div</gi> tags may be nested if appropriate.</p>
+                    <p>The standard structure looks like this:</p>
+                    <egXML xmlns="http://www.tei-c.org/ns/Examples"><TEI>
+                        <teiHeader>
+                            <!-- metadata goes here -->
+                        </teiHeader>
+                        <text>
+                            <body>
+                                <div/>
+                                <div/>
+                                <div/>
+                                <!-- any number of <div>s, including nested ones -->
+                            </body>
+                        </text>
+                    </TEI>
+                    </egXML>
+                    <p>Editors are responsible for ensuring the accuracy of the metadata in <gi>teiHeader</gi>, in close collaboration with Michael Hawkins.</p>
+                </div>
+                <div>
+                    <head>The Header (<gi>teiHeader</gi>)</head>
+                    <div>
+                        <p>Metadata for each electronic file is recorded in a <gi>teiHeader</gi> element, which has three components: <gi>fileDesc</gi>, <gi>profileDesc</gi>, and <gi>revisionDesc</gi> (in that order):</p>
+                        
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                            <teiHeader>
+                                <fileDesc>...</fileDesc>
+                                <profileDesc>...</profileDesc>
+                                <revisionDesc>...</revisionDesc>
+                            </teiHeader>
+                        </egXML>
+                    </div>
+                    <div>
+                        <head>I. <gi>fileDesc</gi></head>
+                        <p><gi>fileDesc</gi> describes the electronic file and its source. It contains the following elements:</p>
+                        <p><gi>titleStmt</gi> contains the document’s <gi>title</gi> and <gi>author</gi>.</p>
+                        <p><gi>publicationStmt</gi> describes the publisher of the XML document. It contains <gi>publisher</gi> (<val>Insatiable Greed Project</val>), <gi>pubPlace</gi> (<val>Cambridge</val>), and an empty <gi>date</gi> element with a machine-readable <att>when</att> attribute (in <val>yyyy-mm-dd</val> format) containing the publication date:</p>
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                            <publicationStmt>
+                                <publisher>Insatiable Greed Project</publisher>
+                                <pubPlace>Cambridge</pubPlace>
+                                <date when="2025-06-17">2025</date>
+                            </publicationStmt>
+                        </egXML>
+                        <p><gi>notesStmt</gi> (optional) contains one or more <gi>note</gi> elements, which may include either plain text or a <gi>p</gi>. In practice, most notes will be brief. If a note grows into multiple paragraphs, consider whether it should be split into separate <gi>note</gi> elements.</p>
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples"><note>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec leo sapien..</note></egXML>
+                        <p>You may include links to related transcriptions using <gi>ref</gi>, as outlined in <ref><gi>ref</gi>'s Element Set entry</ref>.</p>
+                        <p>While <gi>notesStmt</gi> is flexible, it's preferable to use more specific semantic tagging where possible.</p>
+                        <p><gi>sourceDesc</gi> contains a <gi>biblStruct</gi> element if the source is a printed work. Examples include:</p>
+                        <p>Printed monograph</p>
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                            <biblStruct>
+                                <monogr>
+                                    <author>
+                                        <persName>
+                                            <forename>Henry</forename>
+                                            <surname>More</surname>
+                                        </persName>
+                                    </author>
+                                    <title>An antidote against atheisme...</title>
+                                    <title type="short">An antidote against Atheisme</title>
+                                    <imprint>
+                                        <pubPlace>London</pubPlace>
+                                        <publisher>Printed by Roger Daniel</publisher>
+                                        <date when="1653-01-01">1653</date>
+                                    </imprint>
+                                </monogr>
+                            </biblStruct>
+                        </egXML>
+                        
+                        <p>Article or chapter within a monograph</p>
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples"><biblStruct>
+                            <analytic>
+                                <author>
+                                    <persName><!-- ... --></persName>
+                                </author>
+                                <title>A Letter to Mons. Dela Crose...</title>
+                            </analytic>
+                            <monogr>
+                                <editor role="editor"><!-- ... --></editor> <!-- if applicable -->
+                                <title level="j">Letters on several subjects...</title>
+                                <imprint>
+                                    <pubPlace>London</pubPlace>
+                                    <publisher>Printed by W. Onely...</publisher>
+                                    <date when="1694-01-01">1694</date>
+                                    <biblScope unit="pp">115–122</biblScope>
+                                </imprint>
+                            </monogr>
+                        </biblStruct>
+                        </egXML>
+                        
+                        <p>Journal article</p>
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                            <biblStruct>
+                                <analytic>
+                                    <author>
+                                        <persName>
+                                            <forename>Isaac</forename>
+                                            <surname>Newton</surname>
+                                        </persName>
+                                    </author>
+                                    <title>An Accompt of a New Catadioptrical Telescope...</title>
+                                </analytic>
+                                <monogr>
+                                    <title level="j">Philosophical Transactions...</title>
+                                    <imprint>
+                                        <pubPlace>London</pubPlace>
+                                        <date>25 March 1672</date>
+                                        <biblScope unit="no">81</biblScope>
+                                        <biblScope unit="pp">4004–4007</biblScope>
+                                    </imprint>
+                                </monogr>
+                            </biblStruct>
+                        </egXML>
+                        
+                        <p>If a printed source doesn't fit these models or requires additional physical description, please contact Michael Hawkins.</p>
+                    </div>
+                    <div>
+                        <head>II. <gi>profileDesc</gi></head>
+                        <p><gi>langUsage</gi> (mandatory) lists one or more <gi>language</gi> elements using <ref target="https://iso639-3.sil.org/code_tables/639/data">ISO 639-3 codes</ref>, e.g.:</p>
+                        <list>
+                            <item><val>eng</val> (English)</item>
+                            <item><val>grc</val> (Classical Greek)</item>
+                            <item><val>lat</val> (Latin)</item>
+                            <item><val>ara</val> (Arabic)</item>
+                        </list>
+                        <p>These should be listed in order of prominence within the document. For example:</p>
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                            <langUsage>
+                                <language ident="grc">Greek</language>
+                                <language ident="lat">Latin</language>
+                            </langUsage>
+                        </egXML>
+                        <p>For handling language changes within the transcription, see <gi>foreign</gi> in the Guidelines.</p>
+                    </div>
+                    
+                    <div><head>III. <gi>revisionDesc</gi></head>
+                        <p><gi>revisionDesc</gi> records all revisions to the file. Each <gi>change</gi> includes a <att>when</att> date (in <val>yyyy-mm-dd</val> format) and a natural-language summary of the update. The person responsible is identified using a <gi>name</gi> element with a unique <att>xml:id</att>, typically based on their initial and surname (e.g. <val>arussell</val>, <val>mhawkins</val>, <val>nevans</val>).</p>
+                        
+                        <p>Subsequent mentions of a person already declared should use <att>sameAs</att> that points to the <att>xml:id</att> of their first <gi>name</gi> element. For example:</p>
+                        
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples"><revisionDesc>
+                            <change when="2025-10-01">Transcribed by <name xml:id="arussell">Angus Russell</name>.</change>
+                            <change when="2025-10-03">Coding of table updated by <name xml:id="mhawkins">Michael Hawkins</name>.</change>
+                            <change when="2025-10-10">Text proofed by <name xml:id="nevans">Nicholas Evans</name>.</change>
+                            <change when="2025-10-11">Corrections entered by <name sameAs="#arussell">Angus Russell</name>.</change>
+                        </revisionDesc>
+                        </egXML>
+                        <p>Proofreading counts as a revision, even if no changes are made, since it updates the file's editorial status.</p></div>
+                </div>
+                <div>
+                    <schemaSpec ident="insatiable-greed" start="TEI teiCorpus" prefix="tei_" targetLang="en"
+                        docLang="en">
+                        <moduleRef n="01" key="tei"/>
+                        <moduleRef n="02" key="header"/>
+                        <moduleRef n="03" key="core"/>
+                        <moduleRef n="04" key="textstructure"/>
+                        <moduleRef n="05" key="gaiji"/>
+                        <!--<moduleRef n="06" key="verse"/>-->
+                        <!--<moduleRef n="07" key="drama"/>-->
+                        <!--<moduleRef n="08" key="spoken"/>-->
+                        <!--<moduleRef n="09" key="cmc"/>-->
+                        <moduleRef n="18" key="analysis"/>
+                        <!--<moduleRef n="10" key="dictionaries"/>-->
+                        <moduleRef n="11" key="msdescription"/>
+                        <moduleRef n="12" key="transcr"/>
+                        <!--<moduleRef n="13" key="textcrit"/>-->
+                        <moduleRef n="14" key="namesdates"/>
+                        <moduleRef n="15" key="figures" exclude="notatedMusic"/>
+                        <moduleRef n="16" key="corpus" include="ab anchor seg"/>
+                        <moduleRef n="17" key="linking"/>
+                        <!--<moduleRef n="19" key="iso-fs"/>-->
+                        <!--<moduleRef n="20" key="nets"/>-->
+                        <!--<moduleRef n="22" key="certainty"/>-->
+                        <!--<moduleRef n="23" key="tagdocs"/>-->
+                        
+                        <elementSpec ident="gap" mode="change">
+                            <attList>
+                                <attDef ident="reason" usage="req" mode="change">
+                                    <defaultVal>editorial</defaultVal>
+                                    <valList type="closed" mode="replace">
+                                        <valItem mode="add" ident="editorial"/>
+                                    </valList>
+                                </attDef>
+                                <attDef ident="extent" usage="req" mode="change"/>
+                                <attDef ident="unit" usage="req" mode="change">
+                                    <valList type="closed" mode="replace">
+                                        <valItem mode="add" ident="characters"/>
+                                        <valItem mode="add" ident="words"/>
+                                        <valItem mode="add" ident="lines"/>
+                                        <valItem mode="add" ident="pages"/>
+                                    </valList>
+                                </attDef>
+                                
+                                <attDef ident="ana" mode="delete"/>
+                                <attDef ident="atLeast" mode="delete"/>
+                                <attDef ident="atMost" mode="delete"/>
+                                <attDef ident="cert" mode="delete"/>
+                                <attDef ident="change" mode="delete"/>
+                                <attDef ident="confidence" mode="delete"/>
+                                <attDef ident="copyOf" mode="delete"/>
+                                <attDef ident="corresp" mode="delete"/>
+                                <attDef ident="dur" mode="delete"/>
+                                <attDef ident="dur-iso" mode="delete"/>
+                                <attDef ident="end" mode="delete"/>
+                                <attDef ident="evidence" mode="delete"/>
+                                <attDef ident="exclude" mode="delete"/>
+                                <attDef ident="facs" mode="delete"/>
+                                <attDef ident="generatedBy" mode="delete"/>
+                                <attDef ident="instant" mode="delete"/>
+                                <attDef ident="max" mode="delete"/>
+                                <attDef ident="min" mode="delete"/>
+                                <attDef ident="n" mode="delete"/>
+                                <attDef ident="next" mode="delete"/>
+                                <attDef ident="precision" mode="delete"/>
+                                <attDef ident="prev" mode="delete"/>
+                                <attDef ident="quantity" mode="delete"/>
+                                <attDef ident="rend" mode="delete"/>
+                                <attDef ident="rendition" mode="delete"/>
+                                <attDef ident="resp" mode="delete"/>
+                                <attDef ident="sameAs" mode="delete"/>
+                                <attDef ident="scope" mode="delete"/>
+                                <attDef ident="select" mode="delete"/>
+                                <attDef ident="source" mode="delete"/>
+                                <attDef ident="start" mode="delete"/>
+                                <attDef ident="style" mode="delete"/>
+                                <attDef ident="synch" mode="delete"/>
+                                <attDef ident="xml:base" mode="delete"/>
+                                <attDef ident="xml:lang" mode="delete"/>
+                                <attDef ident="xml:space" mode="delete"/>
+                                <attDef ident="xml:id" mode="delete"/>
+                            </attList>
+                        </elementSpec>
+                        
+                        <elementSpec ident="head" mode="change">
+                            <attList>
+                                <attDef ident="rend" mode="change">
+                                    <valList type="closed" mode="replace">
+                                        <valItem mode="add" ident="centred"/>
+                                        <valItem mode="add" ident="flushLineStart"/>
+                                        <valItem mode="add" ident="flushLineEnd"/>
+                                        <valItem mode="add" ident="indent0"/>
+                                        <valItem mode="add" ident="indent5"/>
+                                    </valList>
+                                </attDef>
+                            </attList>
+                        </elementSpec>
+                        <elementSpec ident="hi" mode="change">
+                            <attList>
+                                <attDef ident="rend" mode="change" usage="req">
+                                    <valList type="closed" mode="change">
+                                        <valItem mode="add" ident="italic"/>
+                                        <valItem mode="add" ident="bold"/>
+                                        <valItem mode="add" ident="underline"/>
+                                        <valItem mode="add" ident="superscript"/>
+                                        <valItem mode="add" ident="subscript"/>
+                                    </valList>
+                                </attDef>
+                            </attList>
+                        </elementSpec>
+                        <elementSpec ident="name" mode="change">
+                            <attList>
+                                <attDef ident="type" mode="change" usage="req">
+                                    <valList type="closed" mode="replace">
+                                        <valItem mode="add" ident="ethnonym"/>
+                                        <valItem mode="add" ident="group"/>
+                                        <valItem mode="add" ident="org"/>
+                                        <valItem mode="add" ident="uncertain"/>
+                                        <valItem mode="add" ident="person"/>
+                                    </valList>
+                                </attDef>
+                            </attList>
+                        </elementSpec>
+                        <elementSpec ident="placeName" mode="change">
+                            <!-- <catRef xml:base="../05-authorities/place-names.xml" target="#constantinople"/> -->
+                            <!-- Add schematron rule to check for the existence of the reference -->
+                            <attList>
+                                <attDef ident="xml:base" mode="change" usage="rec">
+                                    <defaultVal>../05-authorities/place-names.xml</defaultVal>
+                                    <valList type="closed" mode="replace">
+                                        <valItem mode="add" ident="../05-authorities/place-names.xml"/>
+                                    </valList>
+                                </attDef>
+                                <!--<attDef ident="type" mode="change" usage="req">
+                                    <valList type="closed" mode="replace">
+                                        <valItem mode="add" ident="ethnonym"/>
+                                        <valItem mode="add" ident="group"/>
+                                        <valItem mode="add" ident="org"/>
+                                        <valItem mode="add" ident="uncertain"/>
+                                        <valItem mode="add" ident="person"/>
+                                    </valList>
+                                </attDef>-->
+                            </attList>
+                        </elementSpec>
+                        <elementSpec ident="p" mode="change">
+                            <attList>
+                                <attDef ident="rend" mode="change">
+                                    <valList type="closed" mode="change">
+                                        <valItem mode="add" ident="centred"/>
+                                        <valItem mode="add" ident="flushLineStart"/>
+                                        <valItem mode="add" ident="flushLineEnd"/>
+                                        <valItem mode="add" ident="indent0"/>
+                                        <valItem mode="add" ident="indent5"/>
+                                    </valList>
+                                </attDef>
+                            </attList>
+                        </elementSpec>
+                    </schemaSpec>
+                </div>
+            </div>
+        </body>
+    </text>
+</TEI>
