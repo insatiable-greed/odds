@@ -415,8 +415,7 @@
                         <egXML xmlns="http://www.tei-c.org/ns/Examples"><foreign xml:lang="lat">Lorem ipsum dolor sit amet, consectetur adipiscing elit</foreign></egXML>
                         <p>If the foreign text is presented with distinctive formatting (e.g. italics), this should be indicated using <att>rend</att>, with values from the character styling section.</p>
                         <p>If a foreign passage crosses element boundaries, use nested <gi>foreign</gi> elements within each block, <hi rend="italic">e.g.</hi></p>
-                        <egXML xmlns="http://www.tei-c.org/ns/Examples">... main English text of document followed by
-                            <foreign xml:lang="lat" rend="italic">Lorem ipsum dolor sit amet (<foreign xml:lang="gre" rend="roman">φιλεῖ </foreign>), consectetur adipiscing elit</foreign> before the English text resumes ....</egXML>
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples">... main English text of document followed by <foreign xml:lang="lat" rend="italic">Lorem ipsum dolor sit amet (<foreign xml:lang="gre" rend="roman">φιλεῖ </foreign>), consectetur adipiscing elit</foreign> before the English text resumes ....</egXML>
                     </div>
                     <div xml:id="names-people-and-places">
                         <head>Names of People and Places</head>
