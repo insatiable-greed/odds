@@ -544,7 +544,7 @@
         </xsl:element>
     </xsl:template>
     
-    <xsl:template match="tei:hi" mode="#all" priority="9">
+    <xsl:template match="tei:hi" priority="9">
         <xsl:variable name="rend_details" as="item()">
             <xsl:call-template name="render_inline">
                 <xsl:with-param name="tokens" select="(@rend, local-name()[not(.='hi')])"/>
