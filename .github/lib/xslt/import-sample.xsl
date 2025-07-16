@@ -57,7 +57,6 @@
     <!-- Handling of <egXML> elements in the TEI example namespace. -->
     
     <xsl:template match="teix:egXML" priority="999" mode="#all">
-        <pre><xsl:apply-templates></xsl:apply-templates></pre>
         <xsl:variable name="container_element" select="cudl:determine-output-element-name(.,'div')"/>
         
         <xsl:element name="{$container_element}">
