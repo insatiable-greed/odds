@@ -34,18 +34,12 @@ table.wovenodd {
 
 div.xmlCodeChunk {
     display:block;
-    margin: 0;
+    margin: 0 0 1rem 0;
     padding: 0 1rem;
-    margin-bottom: 1rem;
 }
 
-.exemplum div.xmlCodeChunk {
-    margin: 0
-}
-
-
-li span.xmlCodeChunk {
-    display: block
+span.xmlCodeChunk {
+    display: inline-block
 }
 
 del.attDef span.att, del {
@@ -68,6 +62,8 @@ h3.oddSpec {
 
 span.xmlCodeChunk pre {
     display: inline !important;
+    padding-left:0;
+    padding-right:0
 }
 
 i, em {
