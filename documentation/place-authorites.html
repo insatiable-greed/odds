@@ -38,7 +38,12 @@
           &lt;placeName&gt;Ile aux cerfs&lt;/placeName&gt;
         &lt;/place&gt;
       &lt;/listPlace&gt;
-    </code></pre></div></td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Content model</span></td><td class="wovenodd-col2"><code class="language-markup">
+    </code></pre></div></td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Schematron</span></td><td class="wovenodd-col2"><code class="language-markup">
+&lt;sch:pattern
+              is-a="declarable"&gt;
+   &lt;sch:param name="tde" value="tei:listPlace"/&gt;
+&lt;/sch:pattern&gt;
+</code></td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Content model</span></td><td class="wovenodd-col2"><code class="language-markup">
 &lt;sequence minOccurs="1" maxOccurs="1"&gt;
    &lt;classRef key="model.headLike" minOccurs="0" maxOccurs="unbounded"/&gt;
    &lt;elementRef key="desc" minOccurs="0" maxOccurs="unbounded"/&gt;
@@ -116,8 +121,8 @@
    &lt;alternate minOccurs="0" maxOccurs="unbounded"&gt;
       &lt;classRef key="model.noteLike"/&gt;
       &lt;classRef key="model.biblLike"/&gt;
+      &lt;classRef key="model.ptrLike"/&gt;
       &lt;elementRef key="idno"/&gt;
-      &lt;elementRef key="ptr"/&gt;
       &lt;elementRef key="linkGrp"/&gt;
       &lt;elementRef key="link"/&gt;
    &lt;/alternate&gt;
@@ -144,7 +149,14 @@
           |&nbsp;tei_name
          )*
       ),
-      ( tei_model.noteLike | tei_model.biblLike | idno | ptr | linkGrp | link )*,
+      (
+         tei_model.noteLike
+       |&nbsp;tei_model.biblLike
+       |&nbsp;tei_model.ptrLike
+       |&nbsp;idno
+       |&nbsp;linkGrp
+       |&nbsp;link
+      )*,
       ( tei_model.placeLike | tei_listPlace )*
    )
 }</pre></td></tr></table></div><h2>Schema place-authorities: Model classes</h2><div><h3 class="oddSpec" id="model.attributable">model.attributable</h3><table class="wovenodd"><tr><td colspan="2" class="wovenodd-col2"><span class="label">model.attributable</span>&nbsp;groups elements that contain a word or phrase that can be attributed to a source. [3.3.3. Quotation 4.3.2. Floating Texts]</td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Module</span></td><td class="wovenodd-col2">tei</td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Used by</span></td><td class="wovenodd-col2"><div class="parent"><a class="link_odd_macroSpec" href="#macro.phraseSeq">macro.phraseSeq</a> <a class="link_odd_classSpec" href="#model.inter">model.inter</a></div></td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Members</span></td><td class="wovenodd-col2"><span class="showmembers1"><a class="link_odd_classSpec" href="#model.quoteLike">model.quoteLike</a></span></td></tr>
@@ -353,7 +365,7 @@
         &lt;name key="name-427308" type="organisation"&gt;New Zealand Parliament, Legislative Council&lt;/name&gt;
       &lt;/author&gt;
     </code></pre></div> <p>The first presumes the availability of an internet connection and a processor that can resolve a URI (most can). The second requires, in addition, a <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code gi"><code class="language-markup">&lt;prefixDef&gt;</code></span> that declares how the <code>nzvm</code> prefix should be interpreted. The third does not require an internet connection, but does require that a file named <span class="name">named_entities.xml</span> be in the same directory as the TEI document. The fourth requires that an entire external system for key resolution be available.</p></td></tr>
-  <tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Note</span></td><td class="wovenodd-col2"><!-- --><p>The <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code att">@key</span> attribute is more flexible and general-purpose, but its use in interchange requires that documentation about how the key is to be resolved be sent to the recipient of the TEI document. In contrast values of the <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code att">@ref</span> attribute are resolved using the widely accepted protocols for a URI, and thus less documentation, if any, is likely required by the recipient in data interchange.</p> <p>These guidelines provide no semantic basis or suggested precedence when both <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code att">@key</span> and <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code att">@ref</span> are provided. For this reason simultaneous use of both is not recommended unless documentation explaining the use is provided, probably in an ODD customizaiton, for interchange.</p></td></tr>
+  <tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Note</span></td><td class="wovenodd-col2"><!-- --><p>The <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code att">@key</span> attribute is more flexible and general-purpose, but its use in interchange requires that documentation about how the key is to be resolved be sent to the recipient of the TEI document. In contrast values of the <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code att">@ref</span> attribute are resolved using the widely accepted protocols for a URI, and thus less documentation, if any, is likely required by the recipient in data interchange.</p> <p>These guidelines provide no semantic basis or suggested precedence when both <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code att">@key</span> and <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code att">@ref</span> are provided. For this reason simultaneous use of both is not recommended unless documentation explaining the use is provided, probably in an ODD customization, for interchange.</p></td></tr>
   
 </table></div><div><h3 class="oddSpec" id="att.datable.custom">att.datable.custom</h3><table class="wovenodd"><tr><td colspan="2" class="wovenodd-col2"><span class="label">att.datable.custom</span>&nbsp;provides attributes for normalization of elements that contain datable events to a custom dating system (i.e. other than the Gregorian used by W3 and ISO). [14.4. Dates]</td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Module</span></td><td class="wovenodd-col2">namesdates</td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Members</span></td><td class="wovenodd-col2"><span class="showmembers1"><a class="link_odd_classSpec" href="#att.datable">att.datable</a><span class="showmembers2"> [<a class="link_odd_elementSpec" href="#name">name</a>] </span></span></td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Attributes</span></td><td class="wovenodd-col2"><table class="attList"><tr><td class="odd_label">when-custom</td><td class="odd_value">supplies the value of a date or time in some custom standard form.<table class="attDef"><tr><td class="odd_label"><span class="label" xml:lang="en">Status</span> </td><td class="odd_value"><span xml:lang="en">Optional</span></td></tr>
       
@@ -439,7 +451,7 @@
         </code></pre></div> <p>All of the examples of the <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code att">@when</span> attribute in the <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code ident">att.datable.w3c</span> class are also valid with respect to this attribute.</p></td></tr>
       
       
-      <tr><td colspan="2"><div xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code xmlCodeChunk"><pre><code class="language-markup">He likes to be punctual. I said &lt;q&gt;&lt;time when-iso="12"&gt;around noon&lt;/time&gt;&lt;/q&gt;, and he showed up at &lt;time when-iso="12:00:00"&gt;12 O'clock&lt;/time&gt; on the dot.</code></pre></div> <p>The second occurence of <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code gi"><code class="language-markup">&lt;time&gt;</code></span> could have been encoded with the <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code att">@when</span> attribute, as <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code val">12:00:00</span> is a valid time with respect to the W3C XML Schema Part 2: Datatypes Second Edition specification. The first occurence could not.</p></td></tr>
+      <tr><td colspan="2"><div xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code xmlCodeChunk"><pre><code class="language-markup">He likes to be punctual. I said &lt;q&gt;&lt;time when-iso="12"&gt;around noon&lt;/time&gt;&lt;/q&gt;, and he showed up at &lt;time when-iso="12:00:00"&gt;12 O'clock&lt;/time&gt; on the dot.</code></pre></div> <p>The second occurrence of <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code gi"><code class="language-markup">&lt;time&gt;</code></span> could have been encoded with the <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code att">@when</span> attribute, as <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code val">12:00:00</span> is a valid time with respect to the W3C XML Schema Part 2: Datatypes Second Edition specification. The first occurrence could not.</p></td></tr>
     </table></td></tr><tr><td class="odd_label">notBefore-iso</td><td class="odd_value">specifies the earliest possible date for the event in standard form, e.g. yyyy-mm-dd.<table class="attDef"><tr><td class="odd_label"><span class="label" xml:lang="en">Status</span> </td><td class="odd_value"><span xml:lang="en">Optional</span></td></tr>
       
       
@@ -606,12 +618,16 @@
       
       
       
+      
+      
       <tr><td class="odd_label"><span xml:lang="en" class="label">Datatype</span> </td><td class="odd_value">ID</td></tr>
       <tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Note</span></td><td class="wovenodd-col2"><!-- --><p>The <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code att">@xml:id</span> attribute may be used to specify a canonical reference for an element; see section <a class="link_ref" href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#CORS">3.11. Reference Systems</a>.</p></td></tr>
       
       
       
     </table></td></tr><tr><td class="odd_label">n</td><td class="odd_value">(number) gives a number (or other label) for an element, which is not necessarily unique within the document.<table class="attDef"><tr><td class="odd_label"><span class="label" xml:lang="en">Status</span> </td><td class="odd_value"><span xml:lang="en">Optional</span></td></tr>
+      
+      
       
       
       
@@ -644,6 +660,8 @@
       
       
       
+      
+      
       <tr><td class="odd_label"><span xml:lang="en" class="label">Datatype</span> </td><td class="odd_value"><a class="link_element" href="#teidata.language">teidata.language</a></td></tr>
       <tr><td colspan="2"><div xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code xmlCodeChunk"><pre><code class="language-markup">
           &lt;p&gt; … The consequences of
@@ -657,6 +675,7 @@
       
       
     </table></td></tr><tr><td class="odd_label">xml:base</td><td class="odd_value">provides a base URI reference with which applications can resolve relative URI references into absolute URI references.<table class="attDef"><tr><td class="odd_label"><span class="label" xml:lang="en">Status</span> </td><td class="odd_value"><span xml:lang="en">Optional</span></td></tr>
+      
       
       
       
@@ -694,11 +713,13 @@
       
       
       
+      
       <tr><td class="odd_label"><span xml:lang="en" class="label">Datatype</span> </td><td class="odd_value"><a class="link_element" href="#teidata.enumerated">teidata.enumerated</a></td></tr>
       <tr><td class="odd_label"><span class="label" xml:lang="en">Legal values are:</span></td><td class="odd_value"><dl class="valList"><dt class="odd_label">default</dt><dd class="odd_value">signals that the application's default white-space processing modes are acceptable</dd><dt class="odd_label">preserve</dt><dd class="odd_value">indicates the intent that applications preserve all white space</dd></dl></td></tr>
       <tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Note</span></td><td class="wovenodd-col2"><!-- --><p>The <a class="link_ref" href="https://www.w3.org/TR/REC-xml/#sec-white-space">XML specification</a> provides further guidance on the use of this attribute. Note that many parsers may not handle xml:space correctly.</p></td></tr>
       
     </table></td></tr></table></td></tr>
+  
   
   
   
@@ -832,6 +853,7 @@
 </table></div><div><h3 class="oddSpec" id="att.global.source">att.global.source</h3><table class="wovenodd"><tr><td colspan="2" class="wovenodd-col2"><span class="label">att.global.source</span>&nbsp;provides attributes used by elements to point to an external source. [1.3.1.1.4. Sources, certainty, and responsibility 3.3.3. Quotation 8.3.4. Writing]</td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Module</span></td><td class="wovenodd-col2">tei</td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Members</span></td><td class="wovenodd-col2"><span class="showmembers1"><a class="link_odd_classSpec" href="#att.global">att.global</a><span class="showmembers2"> [<a class="link_odd_elementSpec" href="#desc">desc</a> <a class="link_odd_elementSpec" href="#name">name</a> <a class="link_odd_elementSpec" href="#place">place</a>] </span></span></td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Attributes</span></td><td class="wovenodd-col2"><table class="attList"><tr><td class="odd_label">source</td><td class="odd_value">specifies the source from which some aspect of this element is drawn.<table class="attDef"><tr><td class="odd_label"><span class="label" xml:lang="en">Status</span> </td><td class="odd_value"><span xml:lang="en">Optional</span></td></tr>
       
       
+      
       <tr><td class="odd_label"><span xml:lang="en" class="label">Datatype</span> </td><td class="odd_value"> 1–∞ <span xml:lang="en">occurrences of</span>&nbsp;<a class="link_element" href="#teidata.pointer">teidata.pointer</a> <span xml:lang="en">separated by whitespace</span></td></tr>
       <tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Schematron</span></td><td class="wovenodd-col2"><code class="language-markup">
 &lt;sch:rule context="tei:*[@source]"&gt;
@@ -846,6 +868,7 @@
       <tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Note</span></td><td class="wovenodd-col2"><!-- --><p>The <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code att">@source</span> attribute points to an external source. When used on an element describing a schema component (<span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code gi"><code class="language-markup">&lt;classRef&gt;</code></span>, <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code gi"><code class="language-markup">&lt;dataRef&gt;</code></span>, <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code gi"><code class="language-markup">&lt;elementRef&gt;</code></span>, <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code gi"><code class="language-markup">&lt;macroRef&gt;</code></span>, <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code gi"><code class="language-markup">&lt;moduleRef&gt;</code></span>, or <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code gi"><code class="language-markup">&lt;schemaSpec&gt;</code></span>), it identifies the source from which declarations for the components should be obtained.</p> <p>On other elements it provides a pointer to the bibliographical source from which a quotation or citation is drawn.</p> <p>In either case, the location may be provided using any form of URI, for example an absolute URI, a relative URI, a private scheme URI of the form <code>tei:x.y.z</code>, where <code>x.y.z</code> indicates the version number, e.g. <code>tei:4.3.2</code> for TEI P5 release 4.3.2 or (as a special case) <code>tei:current</code> for whatever is the latest release, or a private scheme URI that is expanded to an absolute URI as documented in a <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code gi"><code class="language-markup">&lt;prefixDef&gt;</code></span>.</p> <p>When used on elements describing schema components, <span xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xi="http://www.w3.org/2001/XInclude" class="prism-code att">@source</span> should have only one value; when used on other elements multiple values are permitted.</p></td></tr>
         
     </table></td></tr></table></td></tr>
+  
   
   
   
@@ -1201,9 +1224,11 @@ tei_teidata.temporal.w3c =
 </table></div><div><h3 class="oddSpec" id="teidata.text">teidata.text</h3><table class="wovenodd"><tr><td colspan="2"><span class="label">teidata.text</span>&nbsp;defines the range of attribute values used to express some kind of identifying string as a single sequence of Unicode characters possibly including whitespace.</td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Module</span></td><td class="wovenodd-col2">tei</td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Used by</span></td><td class="wovenodd-col2"><div class="parent"></div></td></tr>
   
   
+  
   <tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Content model</span></td><td class="wovenodd-col2"><pre class="eg"><span class="element">&lt;content&gt;</span><br>&nbsp;<span class="element">&lt;dataRef&nbsp;<span class="attribute">name</span>="<span class="attributevalue">string</span>"/&gt;</span><br><span class="element">&lt;/content&gt;</span></pre></td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Declaration</span></td><td class="wovenodd-col2"><pre class="eg">
 tei_teidata.text = string</pre></td></tr>
   <tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Note</span></td><td class="wovenodd-col2"><!-- --><p>Attributes using this datatype must contain a single ‘token’ in which whitespace and other punctuation characters are permitted.</p></td></tr>
+  
 </table></div><div><h3 class="oddSpec" id="teidata.truthValue">teidata.truthValue</h3><table class="wovenodd"><tr><td colspan="2"><span class="label">teidata.truthValue</span>&nbsp;defines the range of attribute values used to express a truth value.</td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Module</span></td><td class="wovenodd-col2">tei</td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Used by</span></td><td class="wovenodd-col2"><div class="parent"></div></td></tr>
   
   
@@ -1219,6 +1244,7 @@ tei_teidata.truthValue = xsd:boolean</pre></td></tr>
   
 </table></div><div><h3 class="oddSpec" id="teidata.versionNumber">teidata.versionNumber</h3><table class="wovenodd"><tr><td colspan="2"><span class="label">teidata.versionNumber</span>&nbsp;defines the range of attribute values used for version numbers.</td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Module</span></td><td class="wovenodd-col2">tei</td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Used by</span></td><td class="wovenodd-col2"><div class="parent"></div></td></tr>
   
+    
   <tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Content model</span></td><td class="wovenodd-col2"><pre class="eg"><span class="element">&lt;content&gt;</span><br>&nbsp;<span class="element">&lt;dataRef&nbsp;<span class="attribute">name</span>="<span class="attributevalue">token</span>"<br>&nbsp;&nbsp;<span class="attribute">restriction</span>="<span class="attributevalue">[\d]+[a-z]*[\d]*(\.[\d]+[a-z]*[\d]*){0,3}</span>"/&gt;</span><br><span class="element">&lt;/content&gt;</span></pre></td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Declaration</span></td><td class="wovenodd-col2"><pre class="eg">
 tei_teidata.versionNumber =
    token { pattern = "[\d]+[a-z]*[\d]*(\.[\d]+[a-z]*[\d]*){0,3}" }</pre></td></tr>
@@ -1237,11 +1263,14 @@ tei_teidata.word = token { pattern = "[^\p{C}\p{Z}]+" }</pre></td></tr>
   
   
 </table></div><div><h3 class="oddSpec" id="teidata.xpath">teidata.xpath</h3><table class="wovenodd"><tr><td colspan="2"><span class="label">teidata.xpath</span>&nbsp;defines attribute values which contain an XPath expression.</td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Module</span></td><td class="wovenodd-col2">tei</td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Used by</span></td><td class="wovenodd-col2"><div class="parent"></div></td></tr>
-
-<tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Content model</span></td><td class="wovenodd-col2"><pre class="eg"><span class="element">&lt;content&gt;</span><br>&nbsp;<span class="element">&lt;textNode/&gt;</span><br><span class="element">&lt;/content&gt;</span></pre></td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Declaration</span></td><td class="wovenodd-col2"><pre class="eg">
+  
+  
+  <tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Content model</span></td><td class="wovenodd-col2"><pre class="eg"><span class="element">&lt;content&gt;</span><br>&nbsp;<span class="element">&lt;textNode/&gt;</span><br><span class="element">&lt;/content&gt;</span></pre></td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Declaration</span></td><td class="wovenodd-col2"><pre class="eg">
 tei_teidata.xpath = text</pre></td></tr>
-<tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Note</span></td><td class="wovenodd-col2"><!-- --><p>Any XPath expression using the syntax defined in <a class="link_ref" href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/BIB.html#XSLT2">6.2. </a>.</p> <p>When writing programs that evaluate XPath expressions, programmers should be mindful of the possibility of malicious code injection attacks. For further information about XPath injection attacks, see the <a class="link_ref" href="https://owasp.org/www-community/attacks/XPATH_Injection">article at OWASP</a>.</p></td></tr>
+  <tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Note</span></td><td class="wovenodd-col2"><!-- --><p>Any XPath expression using the syntax defined in <a class="link_ref" href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/BIB.html#XSLT2">6.2. </a>.</p> <p>When writing programs that evaluate XPath expressions, programmers should be mindful of the possibility of malicious code injection attacks. For further information about XPath injection attacks, see the <a class="link_ref" href="https://owasp.org/www-community/attacks/XPATH_Injection">article at OWASP</a>.</p></td></tr>
+  
 </table></div><div><h3 class="oddSpec" id="teidata.xTruthValue">teidata.xTruthValue</h3><table class="wovenodd"><tr><td colspan="2"><span class="label">teidata.xTruthValue</span>&nbsp;(extended truth value) defines the range of attribute values used to express a truth value which may be unknown.</td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Module</span></td><td class="wovenodd-col2">tei</td></tr><tr><td class="wovenodd-col1"><span class="label" xml:lang="en">Used by</span></td><td class="wovenodd-col2"><div class="parent"></div></td></tr>
+  
   
   
   
@@ -1297,9 +1326,9 @@ tei_macro.phraseSeq =
     |&nbsp;tei_model.global
    )*</pre></td></tr>
   
-</table></div></div><!--TEI back--><div class="stdfooter autogenerated"><div class="footer"><!--standard links to project, institution etc--><a class="plain" href="http://www.example.com/"></a>&nbsp;<a class="plain" href="index.html">Home</a>&nbsp;<a class="plain" href="#">Feedback</a>&nbsp;</div><address>Date: 2025-07-16<br><!--
- Generated from index.xml using XSLT stylesheets version 7.59.0a
+</table></div></div><!--TEI back--><div class="stdfooter autogenerated"><div class="footer"><!--standard links to project, institution etc--><a class="plain" href="http://www.example.com/"></a>&nbsp;<a class="plain" href="index.html">Home</a>&nbsp;<a class="plain" href="#">Feedback</a>&nbsp;</div><address>Date: 2025-10-08<br><!--
+ Generated from index.xml using XSLT stylesheets version 7.60.0a
 		 based on http://www.tei-c.org/Stylesheets/
-		 on 2025-07-16T16:05:56Z.
+		 on 2025-10-08T13:45:22Z.
 		 SAXON HE 12.1.
 		   --></address></div></body></html><script xmlns="http://www.w3.org/1999/xhtml" src="https://unpkg.com/prismjs@1.30.0/prism.js"></script>
