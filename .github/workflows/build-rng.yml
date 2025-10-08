@@ -34,6 +34,8 @@ jobs:
           unzip *.zip
           cd $BRANCH_NAME
           pushd odd
+          mkdir -p ../rng ../documentation
+          rm -f ../rng/*.rng ../documentation/*.html
           OIFS="$IFS"
           IFS=$'\n'
           if [ "${{ vars.BUILD_CORE }}" = true ]; then
@@ -53,7 +55,13 @@ jobs:
           IFS="$OIFS"
           git config --global user.name 'ODD Bot'
           git config --global user.email '<>'
-          git add rng/*.rng documentation/*.html  available-schemata.md
+          deleted_files=$(git ls-files --deleted documentation rng)
+          if [ -n "$deleted_files" ]; then
+            printf '%s\n' "$deleted_files" | while IFS= read -r file; do
+              git add "$file"
+            done
+          fi
+          git add rng/*.rng documentation/*.html available-schemata.md
           git diff-index --quiet HEAD || (git commit -am "ci: generate schemata and documentation" && git push)
         env:
           BUILD_CORE: ${{ vars.BUILD_CORE }}
