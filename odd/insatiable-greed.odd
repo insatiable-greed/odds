@@ -1064,9 +1064,8 @@
                             <memberOf key="att.timed" mode="delete"/>
                         </classes>
                         <attList>
-                     <attDef ident="extent" usage="req" mode="change"/>
+                            <attDef ident="extent" usage="req" mode="change"/>
                             <attDef ident="reason" usage="req" mode="change">
-                                <defaultVal>editorial</defaultVal>
                                 <valList type="closed" mode="replace">
                                     <valItem mode="add" ident="editorial"/>
                                 </valList>
@@ -1342,7 +1341,6 @@
                                 <desc versionDate="2025-07-27" xml:lang="en">provides a human-readable label for the milestone that will be displayed online.</desc>
                             </attDef>
                             <attDef ident="unit" usage="req" mode="change">
-                                <defaultVal>genericMarker</defaultVal>
                                 <valList>
                                     <valItem ident="genericMarker" mode="add"/>
                                 </valList>
@@ -1461,7 +1459,6 @@
                                 </valList>
                             </attDef>
                             <attDef ident="type" usage="opt" mode="change">
-                                <defaultVal>editorial</defaultVal>
                                 <valList type="closed" mode="replace">
                                     <valItem mode="add" ident="editorial"/>
                                 </valList>
@@ -1801,7 +1798,6 @@
                         <!--NEW-->
                      </attDef>
                      <attDef ident="xml:base" mode="change" usage="rec">
-                        <defaultVal>../05-authorities/place-names.xml</defaultVal>
                         <valList type="closed" mode="replace">
                            <valItem mode="add" ident="../05-authorities/place-names.xml"/>
                         </valList>
