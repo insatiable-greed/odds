@@ -535,58 +535,6 @@
                     <!--<moduleRef n="22" key="certainty"/>-->
                     <!--<moduleRef n="23" key="tagdocs"/>-->
                     
-                    <!--REMOVE UNUSED MODEL CLASSES-->
-                    <classSpec  ident="model.addressLike" type="model" mode="delete"/>
-                    <classSpec  ident="model.applicationLike" type="model" mode="delete"/>
-                    <classSpec  ident="model.attributable" type="model" mode="delete"/>
-                    <classSpec  ident="model.availabilityPart" type="model" mode="delete"/>
-                    <classSpec  ident="model.castItemPart" type="model" mode="delete"/>
-                    <classSpec  ident="model.catDescPart" type="model" mode="delete"/>
-                    <classSpec  ident="model.certLike" type="model" mode="delete"/>
-                    <classSpec  ident="model.cmc" type="model" mode="delete"/>
-                    <classSpec  ident="model.dimLike" type="model" mode="delete"/>
-                    <classSpec  ident="model.div1Like" type="model" mode="delete"/>
-                    <classSpec  ident="model.div2Like" type="model" mode="delete"/>
-                    <classSpec  ident="model.div3Like" type="model" mode="delete"/>
-                    <classSpec  ident="model.div4Like" type="model" mode="delete"/>
-                    <classSpec  ident="model.div5Like" type="model" mode="delete"/>
-                    <classSpec  ident="model.div6Like" type="model" mode="delete"/>
-                    <classSpec  ident="model.div7Like" type="model" mode="delete"/>
-                    <classSpec  ident="model.divBottom" type="model" mode="delete"/>
-                    <classSpec  ident="model.divBottomPart" type="model" mode="delete"/>
-                    <classSpec  ident="model.divGenLike" type="model" mode="delete"/>
-                    <classSpec  ident="model.divWrapper" type="model" mode="delete"/>
-                    <classSpec  ident="model.editorialDeclPart" type="model" mode="delete"/>
-                    <classSpec  ident="model.egLike" type="model" mode="delete"/>
-                    <classSpec  ident="model.encodingDescPart" type="model" mode="delete"/>
-                    <classSpec  ident="model.entryPart" type="model" mode="delete"/>
-                    <classSpec  ident="model.eventLike" type="model" mode="delete"/>
-                    <classSpec  ident="model.featureVal" type="model" mode="delete"/>
-                    <classSpec  ident="model.featureVal.complex" type="model" mode="delete"/>
-                    <classSpec  ident="model.featureVal.single" type="model" mode="delete"/>
-                    <classSpec  ident="model.frontPart" type="model" mode="delete"/>
-                    <classSpec  ident="model.frontPart.drama" type="model" mode="delete"/>
-                    <classSpec  ident="model.gLike" type="model" mode="delete"/>
-                    <classSpec  ident="model.global.meta" type="model" mode="delete"/>
-                    <classSpec  ident="model.identEquiv" type="model" mode="delete"/>
-                    <classSpec  ident="model.identSynonyms" type="model" mode="delete"/>
-                    <classSpec  ident="model.lPart" type="model" mode="delete"/>
-                    <classSpec  ident="model.measureLike" type="model" mode="delete"/>
-                    <classSpec  ident="model.objectLike" type="model" mode="delete"/>
-                    <classSpec  ident="model.oddDecl" type="model" mode="delete"/>
-                    <classSpec  ident="model.oddRef" type="model" mode="delete"/>
-                    <classSpec  ident="model.offsetLike" type="model" mode="delete"/>
-                    <classSpec  ident="model.orgStateLike" type="model" mode="delete"/>
-                    <classSpec  ident="model.pPart.msdesc" type="model" mode="delete"/>
-                    <classSpec  ident="model.personLike" type="model" mode="delete"/>
-                    <classSpec  ident="model.phrase.xml" type="model" mode="delete"/>
-                    <classSpec  ident="model.ptrLike" type="model" mode="delete"/>
-                    <classSpec  ident="model.quoteLike" type="model" mode="delete"/>
-                    <classSpec  ident="model.sourceDescPart" type="model" mode="delete"/>
-                    <classSpec  ident="model.specDescLike" type="model" mode="delete"/>
-                    <classSpec  ident="model.stageLike" type="model" mode="delete"/>
-                    <classSpec  ident="model.textDescPart" type="model" mode="delete"/>
-                    
                     <!--Element definitions-->
                     
                     <!--Elements from header-->
