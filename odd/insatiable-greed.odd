@@ -511,7 +511,7 @@
                         <!--Unused elements: argument back byline closer dateline div1 div2 div3 div4 div5 div6 div7 docAuthor docDate docEdition docImprint docTitle epigraph floatingText front group imprimatur opener postscript salute signed titlePage titlePart trailer-->
                     </moduleRef>
                     <!--<moduleRef n="05" key="gaiji"/>-->
-                    <!--<moduleRef n="06" key="verse"/>-->
+                    <moduleRef n="06" key="verse" include="caesura"/>
                     <!--<moduleRef n="07" key="drama"/>-->
                     <!--<moduleRef n="08" key="spoken"/>-->
                     <!--<moduleRef n="09" key="cmc"/>-->
@@ -1141,13 +1141,14 @@
                         <classes mode="change">
                             <memberOf key="att.cmc" mode="delete"/>
                             <memberOf key="att.placement" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
                             <memberOf key="att.written" mode="delete"/>
                         </classes>
                         <attList>
                             <attDef ident="rend" mode="change">
                                 &blockRendList;
                             </attDef>
+                            <attDef ident="type" mode="change"/>
+                            <attDef ident="subtype" mode="change"/>
                             <!--REMOVE-->
                             <attDef ident="ana" mode="delete"/>
                             <attDef ident="cert" mode="delete"/>
@@ -1504,6 +1505,7 @@
                             <attDef ident="rend" mode="change">
                                 &blockRendList;
                             </attDef>
+                            <attDef ident="n" mode="change"/>
                             <!--REMOVE-->
                             <attDef ident="ana" mode="delete"/>
                             <attDef ident="cert" mode="delete"/>
@@ -1512,7 +1514,6 @@
                             <attDef ident="corresp" mode="delete"/>
                             <attDef ident="exclude" mode="delete"/>
                             <attDef ident="facs" mode="delete"/>
-                            <attDef ident="n" mode="delete"/>
                             <attDef ident="next" mode="delete"/>
                             <attDef ident="prev" mode="delete"/>
                             <attDef ident="rendition" mode="delete"/>
@@ -1972,8 +1973,7 @@
                      <attDef ident="type" mode="change">
                         <!--NEW-->
                      </attDef>
-                     <!--REMOVE-->
-                     <attDef ident="subtype" mode="delete"/>
+                      <attDef ident="subtype" mode="change"/>
                   </attList>
                </elementSpec>
 
