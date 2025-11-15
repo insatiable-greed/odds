@@ -508,8 +508,8 @@
                 <schemaSpec ident="insatiable-greed" start="TEI teiCorpus" prefix="tei_" targetLang="en"
                     docLang="en">
                     <moduleRef n="01" key="tei"/>
-                    <moduleRef n="02" key="header" include="availability change editorialDecl encodingDesc fileDesc keywords langUsage language notesStmt profileDesc publicationStmt revisionDesc segmentation sourceDesc teiHeader textClass titleStmt">
-                        <!--Unused elements: abstract appInfo application authority biblFull cRefPattern calendar calendarDesc catDesc catRef category citeData citeStructure classCode classDecl conversion correction correspAction correspContext correspDesc creation distributor edition editionStmt extent funder geoDecl handNote hyphenation idno interpretation licence listChange listPrefixDef namespace normalization prefixDef principal projectDesc punctuation quotation refState refsDecl rendition samplingDecl schemaRef scriptNote seriesStmt sponsor stdVals styleDefDecl tagUsage tagsDecl taxonomy unitDecl unitDef xenoData-->
+                    <moduleRef n="02" key="header" include="availability change editorialDecl encodingDesc fileDesc idno keywords langUsage language notesStmt profileDesc publicationStmt revisionDesc segmentation sourceDesc teiHeader textClass titleStmt">
+                        <!--Unused elements: abstract appInfo application authority biblFull cRefPattern calendar calendarDesc catDesc catRef category citeData citeStructure classCode classDecl conversion correction correspAction correspContext correspDesc creation distributor edition editionStmt extent funder geoDecl handNote hyphenation interpretation licence listChange listPrefixDef namespace normalization prefixDef principal projectDesc punctuation quotation refState refsDecl rendition samplingDecl schemaRef scriptNote seriesStmt sponsor stdVals styleDefDecl tagUsage tagsDecl taxonomy unitDecl unitDef xenoData-->
                     </moduleRef>
                     <moduleRef n="03" key="core" include="analytic author bibl biblScope biblStruct cb choice corr date desc editor foreign gap graphic head hi imprint l lb lg listBibl milestone monogr name note p pb pubPlace publisher rs sic term title">
                         <!--Unused elements: abbr add addrLine address binaryObject cit citedRange del distinct divGen ellipsis email emph expan gb gloss headItem headLabel index item label list measure measureGrp media meeting mentioned noteGrp num orig postBox postCode ptr q quote rb ref reg relatedItem resp respStmt rt ruby said series soCalled sp speaker stage street teiCorpus textLang time unclear unit-->
@@ -793,12 +793,31 @@
                         <classes mode="change">
                             <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.cmc" mode="delete"/>
-                            <memberOf key="att.declarable" mode="delete"/>
                             <memberOf key="att.docStatus" mode="delete"/>
-                            <memberOf key="att.global" mode="delete"/>
                             <memberOf key="att.sortable" mode="delete"/>
-                            <memberOf key="att.typed" mode="delete"/>
                         </classes>
+                        <attList>
+                            <attDef ident="ana" mode="delete"/>
+                            <attDef ident="cert" mode="delete"/>
+                            <attDef ident="change" mode="delete"/>
+                            <attDef ident="copyOf" mode="delete"/>
+                            <attDef ident="corresp" mode="delete"/>
+                            <attDef ident="exclude" mode="delete"/>
+                            <attDef ident="facs" mode="delete"/>
+                            <attDef ident="next" mode="delete"/>
+                            <attDef ident="prev" mode="delete"/>
+                            <attDef ident="rend" mode="delete"/>
+                            <attDef ident="rendition" mode="delete"/>
+                            <attDef ident="resp" mode="delete"/>
+                            <attDef ident="sameAs" mode="delete"/>
+                            <attDef ident="select" mode="delete"/>
+                            <attDef ident="source" mode="delete"/>
+                            <attDef ident="style" mode="delete"/>
+                            <attDef ident="subtype" mode="delete"/>
+                            <attDef ident="synch" mode="delete"/>
+                            <attDef ident="xml:base" mode="delete"/>
+                            <attDef ident="xml:space" mode="delete"/>
+                        </attList>
                     </elementSpec>
                     
                     <elementSpec module="core" ident="cb" mode="change">
