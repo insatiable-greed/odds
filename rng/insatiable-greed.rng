@@ -5,7 +5,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2025-11-15T11:49:48Z. . 
+Schema generated from ODD source 2025-11-15T12:02:11Z. . 
 TEI Edition: P5 Version 4.10.0a. Last updated on 13th August 2025, revision 73d59c946 
 TEI Edition Location: https://www.tei-c.org/Vault/P5/4.10.0a/ 
   
@@ -2058,11 +2058,22 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
    </define>
    <define name="tei_model.teiHeaderPart">
       <choice>
+         <ref name="tei_encodingDesc"/>
          <ref name="tei_profileDesc"/>
       </choice>
    </define>
    <define name="tei_model.sourceDescPart">
       <notAllowed/>
+   </define>
+   <define name="tei_model.encodingDescPart">
+      <choice>
+         <ref name="tei_editorialDecl"/>
+      </choice>
+   </define>
+   <define name="tei_model.editorialDeclPart">
+      <choice>
+         <ref name="tei_segmentation"/>
+      </choice>
    </define>
    <define name="tei_model.profileDescPart">
       <choice>
@@ -3567,6 +3578,58 @@ Suggested values include: 1] volume (volume); 2] issue; 3] page (page); 4] line;
                       is-a="declarable">
             <sch:param name="tde" value="tei:sourceDesc"/>
          </sch:pattern>
+      </element>
+   </define>
+   <define name="tei_encodingDesc">
+      <element name="encodingDesc">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(encoding description) documents the relationship between an electronic text and the source or sources from which it was derived. [2.3. The Encoding Description 2.1.1. The TEI Header and Its Components]</a:documentation>
+         <oneOrMore>
+            <choice>
+               <ref name="tei_model.encodingDescPart"/>
+               <ref name="tei_model.pLike"/>
+            </choice>
+         </oneOrMore>
+         <ref name="tei_att.global.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="tei_editorialDecl">
+      <element name="editorialDecl">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(editorial practice declaration) provides details of editorial principles and practices applied during the encoding of a text. [2.3.3. The Editorial Practices Declaration 2.3. The Encoding Description 16.3.2. Declarable Elements]</a:documentation>
+         <oneOrMore>
+            <choice>
+               <ref name="tei_model.pLike"/>
+               <ref name="tei_model.editorialDeclPart"/>
+            </choice>
+         </oneOrMore>
+         <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:xi="http://www.w3.org/2001/XInclude"
+                      is-a="declarable">
+            <sch:param name="tde" value="tei:editorialDecl"/>
+         </sch:pattern>
+         <ref name="tei_att.global.attributes"/>
+         <ref name="tei_att.declarable.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="tei_segmentation">
+      <element name="segmentation">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(segmentation) describes the principles according to which the text has been segmented, for example into sentences, tone-units, graphemic strata, etc. [2.3.3. The Editorial Practices Declaration 16.3.2. Declarable Elements]</a:documentation>
+         <oneOrMore>
+            <ref name="tei_model.pLike"/>
+         </oneOrMore>
+         <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:xi="http://www.w3.org/2001/XInclude"
+                      is-a="declarable">
+            <sch:param name="tde" value="tei:segmentation"/>
+         </sch:pattern>
+         <ref name="tei_att.global.attributes"/>
+         <ref name="tei_att.declarable.attributes"/>
+         <empty/>
       </element>
    </define>
    <define name="tei_profileDesc">
