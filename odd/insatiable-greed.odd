@@ -1643,6 +1643,7 @@
                                 <!--NEW-->
                             </attDef>
                             <!--REMOVE-->
+                            <attDef ident="base" mode="delete"/>
                             <attDef ident="subtype" mode="delete"/>
                             <attDef ident="xml:base" mode="delete"/>
                             <attDef ident="xml:id" mode="delete"/>
@@ -1977,7 +1978,7 @@
                         <desc versionDate="2016-10-21" xml:lang="en">used to indicate the beginning and end of excerpts within transcribed texts.</desc>
                         <constraintSpec ident="anchor-requires-type" scheme="schematron">
                             <constraint>
-                                <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:anchor[exists(@next|@prev) or matches(@xml:id,'excerpt\d{3,3}(Start|End)')]">
+                                <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:anchor[exists(@next|@prev) or matches(@xml:id,'excerpt[0-9][0-9][0-9](Start|End)')]">
                                     <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="@type">ERROR: <name/> needs @type.</assert>
                                 </rule>
                             </constraint>
@@ -1995,7 +1996,7 @@
                                 <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:anchor[@type='excerptMarker']">
                                     <let name="xmlid" value="@xml:id" />
                                     <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="(@next|@prev)">ERROR: <name/> needs @next (if marking the start of an extract) or @prev (if marking the end).</assert>
-                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="matches(@xml:id,'^#excerpt\d+{3,3}(Start|End)$')">ERROR: <name/>/@xml:id name incorrect. It must match #excerpt{3 digits}Start (if marking the start of an excerpt) or #excerpt{3 digits}End (if marking the end).</assert>
+                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="matches(@xml:id,'^excerpt[0-9][0-9][0-9](Start|End)$')">ERROR: <name/>/@xml:id name incorrect. It must match #excerpt{3 digits}Start (if marking the start of an excerpt) or #excerpt{3 digits}End (if marking the end).</assert>
                                 </rule>
                             </constraint>
                         </constraintSpec>
@@ -2005,7 +2006,7 @@
                                     <let name="text" value="ancestor::tei:text"/>
                                     <let name="next" value="@next" />
                                     <let name="xmlid" value="@xml:id" />
-                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="matches(@next,'^#excerpt\d{3,3}End$')">ERROR: <name/>/@next must match the format #excerpt{digits}End (e.g. pointing to xml:id="excerpt001End").</assert>
+                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="matches(@next,'^#excerpt[0-9][0-9][0-9]End$')">ERROR: <name/>/@next must match the format #excerpt{digits}End (e.g. pointing to xml:id="excerpt001End").</assert>
                                     <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="not(@prev)">ERROR: <name/> with @next must not also contain @prev.</assert>
                                     <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="$text//tei:anchor[concat('#', @xml:id)=$next]">ERROR: <name/> points to nonexistent <name/>/@xml:id='<value-of select="replace($next,'^#','')"/>'.</assert>
                                     <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="concat('#',@xml:id) = $text//tei:anchor[concat('#', @xml:id)=$next]/@prev">ERROR: <name/> is not the target of the ending anchor's @prev.</assert>
@@ -2017,7 +2018,7 @@
                                 <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:anchor[@prev]">
                                     <let name="text" value="ancestor::tei:text"/>
                                     <let name="prev" value="@prev" />
-                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="matches(@prev,'^#excerpt\d{3,3}Start$')">ERROR: <name/>/@prev must match the format #excerpt{digits}Start (e.g. pointing to xml:id="excerpt001Start").</assert>
+                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="matches(@prev,'^#excerpt[0-9][0-9][0-9]Start$')">ERROR: <name/>/@prev must match the format #excerpt{digits}Start (e.g. pointing to xml:id="excerpt001Start").</assert>
                                     <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="not(@next)">ERROR: <name/> with @prev must not also contain @next.</assert>
                                     <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="$text//tei:anchor[concat('#', @xml:id)=$prev]">ERROR: Not <name/>/@xml:id='<value-of select="replace($prev,'^#','')"/>'.</assert>
                                     <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="concat('#',@xml:id) = $text//tei:anchor[concat('#', @xml:id)=$prev]/@next">ERROR: <name/> is not the target of the starting anchor's @next.</assert>
