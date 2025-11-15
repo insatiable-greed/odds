@@ -306,6 +306,13 @@
                         </list>
                     </div>
                 </div>
+                <div xml:id="excerpts">
+                    <div>
+                        <head>Marking Excerpts</head>
+                        <p>If you only want to include one or more portions from a transcribed text, mark the start and end of each excerpt with <gi>anchor</gi> elements. The one at the start of an excerpt should be coded as: <egXML xmlns="http://www.tei-c.org/ns/Examples"> <anchor xml:id="excerpt001Start" next="#excerpt001End" type="excerptMarker"/> </egXML> and the one at the end should be coded as: <egXML xmlns="http://www.tei-c.org/ns/Examples"> <anchor xml:id="excerpt001End" prev="#excerpt001Start" type="excerptMarker"/> </egXML> The <att>next</att> attribute in the starting <gi>anchor</gi> points to the <att>xml:id</att> of the ending <gi>anchor</gi>, which itself points back to the first one using the <att>prev</att> attribute. If a document contains multiple excerpts, each excerpt would need to be marked by their own <gi>anchor</gi> elements with updated <att>xml:id</att>, <att>next</att>, and <att>prev</att>. For example, the anchors of the second excerpt would have start and end values of <val>excerpt002Start</val> and <val>excerpt002End</val>: <egXML xmlns="http://www.tei-c.org/ns/Examples"> <anchor xml:id="excerpt002Start" next="#excerpt002End" type="excerptMarker"/> </egXML> <egXML xmlns="http://www.tei-c.org/ns/Examples"> <anchor xml:id="excerpt002End" prev="#excerpt002Start" type="excerptMarker"/> </egXML> Use a consistent numbering scheme (e.g., three digits) and maintain the bidirectional links within each excerpt pair.</p>
+                    </div>
+                </div>
+                
                 <div xml:id="content_tagging">
                     <head>Content Tagging</head>
                     <div xml:id="headings">
@@ -527,8 +534,8 @@
                         <!--Unused elements: notatedMusic-->
                     </moduleRef>
                     <!--<moduleRef n="16" key="corpus" />-->
-                    <moduleRef n="17" key="linking" include="ab seg">
-                        <!--Unused elements: alt altGrp anchor annotation join joinGrp link linkGrp listAnnotation standOff timeline when-->
+                    <moduleRef n="17" key="linking" include="anchor ab seg">
+                        <!--Unused elements: alt altGrp annotation join joinGrp link linkGrp listAnnotation standOff timeline when-->
                     </moduleRef>
                     <!--<moduleRef n="19" key="iso-fs"/>-->
                     <!--<moduleRef n="20" key="nets"/>-->
@@ -1963,6 +1970,115 @@
                      <attDef ident="xml:space" mode="delete"/>
                   </attList>
                </elementSpec>
+                    
+                    <elementSpec ident="anchor" module="linking" mode="change">
+                        <desc versionDate="2016-10-21" xml:lang="en">used to indicate the beginning and end of excerpts within transcribed texts.</desc>
+                        <constraintSpec ident="anchor-requires-type" scheme="schematron">
+                            <constraint>
+                                <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:anchor[exists(@next|@prev) or matches(@xml:id,'excerpt\d{3,3}(Start|End)')]">
+                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="@type">ERROR: <name/> needs @type.</assert>
+                                </rule>
+                            </constraint>
+                        </constraintSpec>
+                        
+                        <constraintSpec ident="excerptMarker-requires-connector" scheme="schematron">
+                            <constraint>
+                                <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:anchor[@type='excerptMarker']">
+                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="(@next|@prev)">ERROR: <name/>  needs either @next (if it's the start of an excerpt) or @prev (if it's the end).</assert>
+                                </rule>
+                            </constraint>
+                        </constraintSpec>
+                        <constraintSpec ident="anchor-extract-id-checks" scheme="schematron">
+                            <constraint>
+                                <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:anchor[@type='excerptMarker']">
+                                    <let name="xmlid" value="@xml:id" />
+                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="(@next|@prev)">ERROR: <name/> needs @next (if marking the start of an extract) or @prev (if marking the end).</assert>
+                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="matches(@xml:id,'^#excerpt\d+{3,3}(Start|End)$')">ERROR: <name/>/@xml:id name incorrect. It must match #excerpt{3 digits}Start (if marking the start of an excerpt) or #excerpt{3 digits}End (if marking the end).</assert>
+                                </rule>
+                            </constraint>
+                        </constraintSpec>
+                        <constraintSpec ident="anchor-next-checks" scheme="schematron">
+                            <constraint>
+                                <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:anchor[@next]">
+                                    <let name="text" value="ancestor::tei:text"/>
+                                    <let name="next" value="@next" />
+                                    <let name="xmlid" value="@xml:id" />
+                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="matches(@next,'^#excerpt\d{3,3}End$')">ERROR: <name/>/@next must match the format #excerpt{digits}End (e.g. pointing to xml:id="excerpt001End").</assert>
+                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="not(@prev)">ERROR: <name/> with @next must not also contain @prev.</assert>
+                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="$text//tei:anchor[concat('#', @xml:id)=$next]">ERROR: <name/> points to nonexistent <name/>/@xml:id='<value-of select="replace($next,'^#','')"/>'.</assert>
+                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="concat('#',@xml:id) = $text//tei:anchor[concat('#', @xml:id)=$next]/@prev">ERROR: <name/> is not the target of the ending anchor's @prev.</assert>
+                                </rule>
+                            </constraint>
+                        </constraintSpec>
+                        <constraintSpec ident="anchor-prev-checks" scheme="schematron">
+                            <constraint>
+                                <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:anchor[@prev]">
+                                    <let name="text" value="ancestor::tei:text"/>
+                                    <let name="prev" value="@prev" />
+                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="matches(@prev,'^#excerpt\d{3,3}Start$')">ERROR: <name/>/@prev must match the format #excerpt{digits}Start (e.g. pointing to xml:id="excerpt001Start").</assert>
+                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="not(@next)">ERROR: <name/> with @prev must not also contain @next.</assert>
+                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="$text//tei:anchor[concat('#', @xml:id)=$prev]">ERROR: Not <name/>/@xml:id='<value-of select="replace($prev,'^#','')"/>'.</assert>
+                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="concat('#',@xml:id) = $text//tei:anchor[concat('#', @xml:id)=$prev]/@next">ERROR: <name/> is not the target of the starting anchor's @next.</assert>
+                                </rule>
+                            </constraint>
+                        </constraintSpec>
+                        <attList>
+                            <attDef ident="type" usage="req" mode="change">
+                                <desc versionDate="2014-04-20" xml:lang="en">values are "<val>excerptMark</val>" (for the anchor elements marking the start/finish of the excerpt) and "<val>continueMarker</val>" (for the marker identifying where the initial display is the end with the following text hidden behind a 'More...' button).</desc>
+                                <valList type="closed" mode="replace">
+                                    <valItem ident="excerptMarker"/>
+                                </valList>
+                            </attDef>
+                            <attDef ident="xml:id" usage="req" mode="change">
+                                <datatype>
+                                    <rng:data xmlns:rng="http://relaxng.org/ns/structure/1.0" type="ID">
+                                        <rng:param name="pattern">excerpt\d{3,3}(Start|End)</rng:param>
+                                    </rng:data>
+                                </datatype>
+                            </attDef>
+                            <attDef ident="next" usage="opt" mode="change">
+                                <datatype>
+                                    <rng:data xmlns:rng="http://relaxng.org/ns/structure/1.0" type="string">
+                                        <rng:param name="pattern">#excerpt\d{3,3}End</rng:param>
+                                    </rng:data>
+                                </datatype>
+                            </attDef>
+                            <attDef ident="prev" usage="opt" mode="change">
+                                <datatype>
+                                    <rng:data xmlns:rng="http://relaxng.org/ns/structure/1.0" type="string">
+                                        <rng:param name="pattern">#excerpt\d{3,3}Start</rng:param>
+                                    </rng:data>
+                                </datatype>
+                            </attDef>
+                            
+                            <!-- Deleting attributes -->
+                            <attDef ident="ana" mode="delete" />
+                            <attDef ident="change" mode="delete" />
+                            <attDef ident="copyOf" mode="delete" />
+                            <attDef ident="corresp" mode="delete" />
+                            <attDef ident="exclude" mode="delete" />
+                            <attDef ident="facs" mode="delete" />
+                            <attDef ident="n" mode="delete" />
+                            <attDef ident="rend" mode="delete" />
+                            <attDef ident="rendition" mode="delete" />
+                            <attDef ident="sameAs" mode="delete" />
+                            <attDef ident="select" mode="delete" />
+                            <attDef ident="style" mode="delete" />
+                            <attDef ident="subtype" mode="delete" />
+                            <attDef ident="synch" mode="delete" />
+                            <attDef ident="xml:base" mode="delete" />
+                            <attDef ident="xml:lang" mode="delete" />
+                            <attDef ident="xml:space" mode="delete" />
+                        </attList>
+                        <exemplum xml:lang="en">
+                            <egXML xmlns="http://www.tei-c.org/ns/Examples" />
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus porttitor vestibulum posuere. <anchor xml:id="excerpt001Start" next="#excerpt001End" type="excerptMarker"/>Curabitur sed interdum velit, sed blandit tellus. Sed quis tempus enim. Phasellus at orci a velit accumsan vestibulum vitae ac est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus aliquam maximus sem, in sagittis augue vestibulum at. Curabitur ullamcorper mattis odio. Quisque porta ex et turpis egestas gravida ut id nibh. Aenean accumsan sodales magna finibus congue. Nunc eget sollicitudin mauris, luctus lobortis erat. Praesent fermentum neque ut tellus consectetur gravida. Nam risus nisl, laoreet a nisi sit amet, commodo finibus sem. Donec gravida sem sit amet quam lobortis hendrerit. Quisque tellus sapien, laoreet quis maximus non, facilisis ut orci. Quisque faucibus nisi nec ullamcorper egestas.</p>
+                            <p>Aenean hendrerit lobortis ultrices. Vivamus porta interdum velit non vehicula. Curabitur aliquet tellus felis, a placerat libero ornare non. Pellentesque a maximus tortor. Nam dictum augue ipsum, eget tempor ante eleifend et. Praesent sed blandit sapien. Vivamus eu pharetra odio, ac fermentum orci. Ut pretium mauris vitae quam pulvinar luctus. Cras ultricies eros id turpis vestibulum ultricies. Quisque eget diam sapien. Nam semper, sapien ut imperdiet finibus, sapien ipsum dignissim mi, in dapibus ligula ipsum at velit. Pellentesque vitae<anchor xml:id="excerpt001End" prev="#excerpt001Start" type="excerptMarker"/> efficitur ante. In malesuada luctus purus ut ullamcorper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent nisi nisl, viverra sit amet sem et, maximus vehicula neque.</p>
+                        </exemplum>
+                        <remarks versionDate="2014-06-11" xml:lang="en">
+                            <p/>
+                        </remarks>
+                    </elementSpec>
                 </schemaSpec>
             </div>
         </body>
