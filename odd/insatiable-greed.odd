@@ -511,8 +511,8 @@
                     <moduleRef n="02" key="header" include="availability change fileDesc keywords langUsage language notesStmt profileDesc publicationStmt revisionDesc sourceDesc teiHeader textClass titleStmt">
                         <!--Unused elements: abstract appInfo application authority biblFull cRefPattern calendar calendarDesc catDesc catRef category citeData citeStructure classCode classDecl conversion correction correspAction correspContext correspDesc creation distributor edition editionStmt editorialDecl encodingDesc extent funder geoDecl handNote hyphenation idno interpretation licence listChange listPrefixDef namespace normalization prefixDef principal projectDesc punctuation quotation refState refsDecl rendition samplingDecl schemaRef scriptNote segmentation seriesStmt sponsor stdVals styleDefDecl tagUsage tagsDecl taxonomy unitDecl unitDef xenoData-->
                     </moduleRef>
-                    <moduleRef n="03" key="core" include="analytic author biblScope biblStruct cb choice corr date desc editor foreign gap graphic head hi imprint l lb lg listBibl milestone monogr name note p pb pubPlace publisher rs sic term title">
-                        <!--Unused elements: abbr add addrLine address bibl binaryObject cit citedRange del distinct divGen ellipsis email emph expan gb gloss headItem headLabel index item label list measure measureGrp media meeting mentioned noteGrp num orig postBox postCode ptr q quote rb ref reg relatedItem resp respStmt rt ruby said series soCalled sp speaker stage street teiCorpus textLang time unclear unit-->
+                    <moduleRef n="03" key="core" include="analytic author bibl biblScope biblStruct cb choice corr date desc editor foreign gap graphic head hi imprint l lb lg listBibl milestone monogr name note p pb pubPlace publisher rs sic term title">
+                        <!--Unused elements: abbr add addrLine address binaryObject cit citedRange del distinct divGen ellipsis email emph expan gb gloss headItem headLabel index item label list measure measureGrp media meeting mentioned noteGrp num orig postBox postCode ptr q quote rb ref reg relatedItem resp respStmt rt ruby said series soCalled sp speaker stage street teiCorpus textLang time unclear unit-->
                     </moduleRef>
                     <moduleRef n="04" key="textstructure" include="TEI body div text">
                         <!--Unused elements: argument back byline closer dateline div1 div2 div3 div4 div5 div6 div7 docAuthor docDate docEdition docImprint docTitle epigraph floatingText front group imprimatur opener postscript salute signed titlePage titlePart trailer-->
@@ -1631,9 +1631,9 @@
                     <elementSpec module="core" ident="title" mode="change">
                         <!--NEW-->
                         <classes mode="change">
+                            <memberOf key="att.canonical" mode="delete"/>
                             <memberOf key="att.cmc" mode="delete"/>
                             <memberOf key="att.datable" mode="delete"/>
-                            <memberOf key="att.global" mode="delete"/>
                         </classes>
                         <attList>
                             <attDef ident="level" mode="change">
