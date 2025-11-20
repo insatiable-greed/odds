@@ -527,8 +527,8 @@
                     <!--<moduleRef n="11" key="msdescription" except="binding bindingDesc catchwords collation filiation foliation musicNotation"/>-->
                     <!--<moduleRef n="12" key="transcr" except="facsimile fw line retrace surface surfaceGrp zone"/>-->
                     <!--<moduleRef n="13" key="textcrit"/>-->
-                    <moduleRef n="14" key="namesdates" include="forename listRelation persName place placeName surname">
-                        <!--Unused elements: addName affiliation age birth bloc climate country death district education event eventName faith floruit genName gender geo geogFeat geogName langKnowledge langKnown listEvent listNym listObject listOrg listPerson listPlace location nameLink nationality nym object objectIdentifier objectName occupation offset org orgName persPronouns person personGrp persona population region relation residence roleName settlement sex socecStatus state terrain trait-->
+                    <moduleRef n="14" key="namesdates" include="forename listRelation persName place placeName relation surname">
+                        <!--Unused elements: addName affiliation age birth bloc climate country death district education event eventName faith floruit genName gender geo geogFeat geogName langKnowledge langKnown listEvent listNym listObject listOrg listPerson listPlace location nameLink nationality nym object objectIdentifier objectName occupation offset org orgName persPronouns person personGrp persona population region residence roleName settlement sex socecStatus state terrain trait-->
                     </moduleRef>
                     <moduleRef n="15" key="figures" include="cell figDesc figure formula row table">
                         <!--Unused elements: notatedMusic-->
